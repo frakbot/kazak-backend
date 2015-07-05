@@ -1,0 +1,16 @@
+{
+  "name": "parse-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Francesco Pontillo <francescopontillo@gmail.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "moment": "^2.10.3",
+    "object-assign": "^3.0.0",
+    "parse": "^1.4.2"
+  }
+}
