@@ -11,6 +11,7 @@
   "dependencies": {
     "moment": "^2.10.3",
     "object-assign": "^3.0.0",
-    "parse": "^1.4.2"
+    "parse": "^1.4.2",
+    "q": "^1.4.1"
   }
 }
