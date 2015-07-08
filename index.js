@@ -7,13 +7,13 @@ var config = require('./config');
 var Parse = ParseLib.Parse;
 Parse.initialize(config['appKey'], config['jsKey'], config['master']);
 
-var purger = require('./purger');
-var linker = require('./linker');
+var purger = require('./lib/purger');
+var linker = require('./lib/linker');
 
-var Room = require('./lib/Room');
-var TimeSlot = require('./lib/TimeSlot');
-var Talk = require('./lib/Talk');
-var Presenter = require('./lib/Presenter');
+var Room = require('./lib/model/Room');
+var TimeSlot = require('./lib/model/TimeSlot');
+var Talk = require('./lib/model/Talk');
+var Presenter = require('./lib/model/Presenter');
 
 var rooms = require('./lib/bootstrap/rooms');
 var timeSlots = require('./lib/bootstrap/timeSlots');
