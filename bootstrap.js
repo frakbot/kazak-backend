@@ -23,6 +23,7 @@ var presenters = require('./lib/bootstrap/presenters');
 
 var talkPresenters = require('./lib/bootstrap/relations/talk-presenters');
 var talkRoom = require('./lib/bootstrap/relations/talk-room');
+var talkTimeSlot = require('./lib/bootstrap/relations/talk-timeSlot');
 
 var purges = Q.all([
   purger(Room, rooms),
@@ -37,6 +38,9 @@ purges
   })
   .then(function() {
     return linker(Talk, Room, 'room', talkRoom);
+  })
+  .then(function() {
+    return linker(Talk, TimeSlot, 'timeSlot', talkTimeSlot);
   })
   .then(function() {
     console.log('Completed.');
