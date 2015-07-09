@@ -1,14 +1,20 @@
 {
-  "name": "parse-test",
+  "name": "droidcon",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Francesco Pontillo <francescopontillo@gmail.com>",
   "license": "Apache-2.0",
+  "engines": {
+    "node": "0.12.2"
+  },
   "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
     "moment": "^2.10.3",
     "object-assign": "^3.0.0",
     "parse": "^1.4.2",

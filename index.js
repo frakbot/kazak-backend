@@ -1,52 +1,36 @@
 'use strict';
 
-var Q = require('q');
-var ParseLib = require('parse');
+var Parse = require('parse').Parse;
+var express = require('express');
+var bodyParser = require('body-parser');
+var appMiddleware = require('./middleware/app');
+var userMiddleware = require('./middleware/user');
 
-var config = require('./cloud/config');
-var Parse = ParseLib.Parse;
+var talks = require('./endpoint/talks');
+
+var Conference = require('./model/Conference');
+var Presenter = require('./model/Presenter');
+var TimeSlot = require('./model/TimeSlot');
+var Talk = require('./model/Talk');
+var Room = require('./model/Room');
+
+var app = express();
+app.set('port', (process.env.PORT || 5000));
+
+app.all('/api/*', appMiddleware, userMiddleware);
+app.use(bodyParser.json());
+
+var config = require('./config');
 Parse.initialize(config['appKey'], config['jsKey'], config['master']);
 
-var purger = require('./lib/purger');
-var linker = require('./lib/linker');
+talks(app);
 
-var Room = require('./cloud/model/Room');
-var TimeSlot = require('./cloud/model/TimeSlot');
-var Talk = require('./cloud/model/Talk');
-var Presenter = require('./cloud/model/Presenter');
+app.use(function(err, req, res) {
+  console.error(err.stack);
+  res.status(500);
+  res.send(err);
+});
 
-var rooms = require('./lib/bootstrap/rooms');
-var timeSlots = require('./lib/bootstrap/timeSlots');
-var talks = require('./lib/bootstrap/talks');
-var presenters = require('./lib/bootstrap/presenters');
-
-var talkPresenters = require('./lib/bootstrap/relations/talk-presenters');
-var talkRoom = require('./lib/bootstrap/relations/talk-room');
-
-/*
-var purges = Q.all([
-  purger(Room, rooms),
-  purger(TimeSlot, timeSlots),
-  purger(Talk, talks),
-  purger(Presenter, presenters)
-]);
-
-purges
-  .then(function () {
-    return linker(Talk, Presenter, 'presenters', talkPresenters);
-  })
-  .then(function () {
-    return linker(Talk, Room, 'room', talkRoom);
-  })
-  .then(function () {
-    console.log('Completed.');
-  });
-*/
-
-var query = new Parse.Query(Talk);
-query.include('room');
-// query.include('presenters');
-query.find(null, {useMasterKey: true})
-  .then(function(res) {
-    console.log(res);
-  });
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
