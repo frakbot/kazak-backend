@@ -9,8 +9,11 @@ var getAll = function(req, res) {
     });
 };
 
-var get = function(req, res, next) {
-  // TODO
+var get = function(req, res) {
+  Talk.get(req.params.talk)
+    .then(function(data) {
+      res.send(data);
+    });
 };
 
 var post = function(req, res, next) {
