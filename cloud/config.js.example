@@ -1,5 +1,5 @@
-{
+module.exports = {
   "appKey": "the-application-key",
   "jsKey": "the-js-key",
   "master": "the-master-key"
-}
+};

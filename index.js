@@ -3,17 +3,17 @@
 var Q = require('q');
 var ParseLib = require('parse');
 
-var config = require('./config');
+var config = require('./cloud/config');
 var Parse = ParseLib.Parse;
 Parse.initialize(config['appKey'], config['jsKey'], config['master']);
 
 var purger = require('./lib/purger');
 var linker = require('./lib/linker');
 
-var Room = require('./lib/model/Room');
-var TimeSlot = require('./lib/model/TimeSlot');
-var Talk = require('./lib/model/Talk');
-var Presenter = require('./lib/model/Presenter');
+var Room = require('./cloud/model/Room');
+var TimeSlot = require('./cloud/model/TimeSlot');
+var Talk = require('./cloud/model/Talk');
+var Presenter = require('./cloud/model/Presenter');
 
 var rooms = require('./lib/bootstrap/rooms');
 var timeSlots = require('./lib/bootstrap/timeSlots');
@@ -23,6 +23,7 @@ var presenters = require('./lib/bootstrap/presenters');
 var talkPresenters = require('./lib/bootstrap/relations/talk-presenters');
 var talkRoom = require('./lib/bootstrap/relations/talk-room');
 
+/*
 var purges = Q.all([
   purger(Room, rooms),
   purger(TimeSlot, timeSlots),
@@ -39,4 +40,13 @@ purges
   })
   .then(function () {
     console.log('Completed.');
+  });
+*/
+
+var query = new Parse.Query(Talk);
+query.include('room');
+// query.include('presenters');
+query.find(null, {useMasterKey: true})
+  .then(function(res) {
+    console.log(res);
   });

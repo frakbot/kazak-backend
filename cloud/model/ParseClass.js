@@ -1,6 +1,12 @@
 'use strict';
 
-var Parse = require('parse').Parse;
+var Parse;
+
+try {
+  Parse = require('parse').Parse;
+} catch (Error) {
+  // ignore
+}
 
 var getParseClass = function (className, attributes) {
   var ParseClass = Parse.Object.extend(className);
@@ -15,6 +21,17 @@ var getParseClass = function (className, attributes) {
       }
     });
   });
+
+  ParseClass.prototype.toObject = function () {
+    var self = this;
+    var object = {
+      id: self.id
+    };
+    attributes.forEach(function (attribute) {
+      object[attribute] = self.get(attribute);
+    });
+    return object;
+  };
 
   return ParseClass;
 };
