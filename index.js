@@ -3,10 +3,9 @@
 var Parse = require('parse').Parse;
 var express = require('express');
 var bodyParser = require('body-parser');
+
 var appMiddleware = require('./middleware/app');
 var userMiddleware = require('./middleware/user');
-
-var talks = require('./endpoint/talks');
 
 var Conference = require('./model/Conference');
 var Presenter = require('./model/Presenter');
@@ -14,18 +13,21 @@ var TimeSlot = require('./model/TimeSlot');
 var Talk = require('./model/Talk');
 var Room = require('./model/Room');
 
+var config = require('./lib/config');
+
+var talks = require('./endpoint/talks');
+
+Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
+
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
 app.all('/api/*', appMiddleware, userMiddleware);
 app.use(bodyParser.json());
 
-var config = require('./config');
-Parse.initialize(config['appKey'], config['jsKey'], config['master']);
-
 talks(app);
 
-app.use(function(err, req, res) {
+app.use(function(req, res, next, err) {
   console.error(err.stack);
   res.status(500);
   res.send(err);
