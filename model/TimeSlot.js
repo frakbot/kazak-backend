@@ -2,4 +2,4 @@
 
 var ParseClass = require('./ParseClass');
 
-module.exports = ParseClass('TimeSlot', ['startDate', 'endDate']);
+module.exports = ParseClass('TimeSlot', ['name', 'startDate', 'endDate']);
