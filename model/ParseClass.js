@@ -3,26 +3,26 @@
 var Parse = require('parse').Parse;
 var Q = require('q');
 
-var getParseClass = function (className, attributes) {
+var getParseClass = function(className, attributes) {
   var ParseClass = Parse.Object.extend(className);
 
-  attributes.forEach(function (attribute) {
+  attributes.forEach(function(attribute) {
     Object.defineProperty(ParseClass.prototype, attribute, {
-      get: function () {
+      get: function() {
         return this.get(attribute);
       },
-      set: function (value) {
+      set: function(value) {
         return this.set(attribute, value);
       }
     });
   });
 
-  ParseClass.prototype.toObject = function () {
+  ParseClass.prototype.toObject = function() {
     var self = this;
     var object = {
       id: self.id
     };
-    attributes.forEach(function (attribute) {
+    attributes.forEach(function(attribute) {
       var value = self.get(attribute);
       if (value && value.toObject) {
         value = value.toObject();

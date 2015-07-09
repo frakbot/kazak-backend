@@ -32,12 +32,12 @@ var purges = Q.all([
 ]);
 
 purges
-  .then(function () {
+  .then(function() {
     return linker(Talk, Presenter, 'presenters', talkPresenters);
   })
-  .then(function () {
+  .then(function() {
     return linker(Talk, Room, 'room', talkRoom);
   })
-  .then(function () {
+  .then(function() {
     console.log('Completed.');
   });
