@@ -2,18 +2,18 @@
 
 var Talk = require('./../model/Talk');
 
-var getAll = function(req, res) {
+var getAll = function(req, res, next) {
   Talk.getAll()
     .then(function(data) {
       res.send(data);
-    });
+    }, next);
 };
 
-var get = function(req, res) {
+var get = function(req, res, next) {
   Talk.get(req.params.talk)
     .then(function(data) {
       res.send(data);
-    });
+    }, next);
 };
 
 var post = function(req, res, next) {

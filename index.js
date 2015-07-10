@@ -27,8 +27,11 @@ app.use(bodyParser.json());
 
 talks(app);
 
-app.use(function(req, res, next, err) {
-  console.error(err.stack);
+app.use(function(err, req, res, next) {
+  if (!err) {
+    return next();
+  }
+  console.error(err);
   res.status(500);
   res.send(err);
 });

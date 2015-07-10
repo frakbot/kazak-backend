@@ -1,7 +1,6 @@
 'use strict';
 
 var ParseClass = require('./ParseClass');
-var errorHandler = require('./../lib/errorHandler');
 var Parse = require('parse').Parse;
 
 var Talk = ParseClass('Talk',
@@ -21,7 +20,7 @@ Talk.getAll = function() {
     })
     .then(function(elems) {
       return Talk.convertAll(elems, talkExpansions);
-    }, errorHandler);
+    });
 };
 
 Talk.get = function(id) {
@@ -33,7 +32,7 @@ Talk.get = function(id) {
     })
     .then(function(elem) {
       return elem.convert(talkExpansions);
-    }, errorHandler);
+    });
 };
 
 module.exports = Talk;
