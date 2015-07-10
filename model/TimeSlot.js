@@ -1,27 +1,29 @@
 'use strict';
 
-var ParseClass = require('./ParseClass');
+var Rx = require('rx');
+var Talk = require('./Talk');
 var Parse = require('parse').Parse;
 
-var TimeSlot = ParseClass('TimeSlot', ['name', 'startDate', 'endDate']);
+var TimeSlot = {};
 
 TimeSlot.getAll = function() {
-  return new Parse.Query(TimeSlot)
+  return new Parse.Query(Talk)
+    .select(['start', 'end'])
     .find({
       useMasterKey: true
     })
-    .then(function(elems) {
-      return TimeSlot.convertAll(elems);
-    });
-};
-
-TimeSlot.get = function(id) {
-  return new Parse.Query(TimeSlot)
-    .get(id, {
-      useMasterKey: true
+    .then(function(allTimeSlots) {
+      return Rx.Observable
+        .from(allTimeSlots)
+        .distinct(undefined, function(x, y) {
+          return (x.get('start').getTime() === y.get('start').getTime() &&
+                  x.get('end').getTime() === y.get('end').getTime());
+        })
+        .toArray()
+        .toPromise();
     })
-    .then(function(elem) {
-      return elem.convert();
+    .then(function(elems) {
+      return Talk.convertAll(elems, undefined, {'id': true});
     });
 };
 
