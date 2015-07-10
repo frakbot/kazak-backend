@@ -25,8 +25,10 @@ Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.g
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
-app.all('/api/*', appMiddleware, userMiddleware);
+app.use(require('./lib/hostHandlers'));
 app.use(bodyParser.json());
+
+app.all('/api/*', appMiddleware, userMiddleware);
 
 rooms(app);
 timeSlots(app);
@@ -42,6 +44,7 @@ app.use(function(err, req, res, next) {
   res.send(err);
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+var server = app.listen(app.get('port'), '0.0.0.0', function() {
+  console.log('App listening at %s:%s...', server.address().address, server.address().port);
+  console.log('Press CTRL+C to quit.');
 });
