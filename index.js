@@ -15,6 +15,7 @@ var Room = require('./model/Room');
 
 var config = require('./lib/config');
 
+var presenters = require('./endpoint/presenters');
 var talks = require('./endpoint/talks');
 
 Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
@@ -25,6 +26,7 @@ app.set('port', (process.env.PORT || 5000));
 app.all('/api/*', appMiddleware, userMiddleware);
 app.use(bodyParser.json());
 
+presenters(app);
 talks(app);
 
 app.use(function(err, req, res, next) {
