@@ -15,6 +15,7 @@ var Room = require('./model/Room');
 
 var config = require('./lib/config');
 
+var rooms = require('./endpoint/rooms');
 var presenters = require('./endpoint/presenters');
 var talks = require('./endpoint/talks');
 
@@ -26,6 +27,7 @@ app.set('port', (process.env.PORT || 5000));
 app.all('/api/*', appMiddleware, userMiddleware);
 app.use(bodyParser.json());
 
+rooms(app);
 presenters(app);
 talks(app);
 
