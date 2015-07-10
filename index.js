@@ -16,6 +16,7 @@ var Room = require('./model/Room');
 var config = require('./lib/config');
 
 var rooms = require('./endpoint/rooms');
+var timeSlots = require('./endpoint/timeSlots');
 var presenters = require('./endpoint/presenters');
 var talks = require('./endpoint/talks');
 
@@ -28,6 +29,7 @@ app.all('/api/*', appMiddleware, userMiddleware);
 app.use(bodyParser.json());
 
 rooms(app);
+timeSlots(app);
 presenters(app);
 talks(app);
 
