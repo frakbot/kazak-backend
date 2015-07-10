@@ -4,17 +4,18 @@ var ParseClass = require('./ParseClass');
 var Parse = require('parse').Parse;
 
 var Talk = ParseClass('Talk',
-  ['name', 'description', 'subtitle', 'presenters', 'room', 'timeSlot']);
+  ['name', 'description', 'subtitle', 'presenters', 'room', 'start', 'end']);
 
-var talkExpansions = [{
-  name: 'presenters',
-  children: []
-}];
+var talkExpansions = {
+  'presenters': {
+    'include': {},
+    'exclude': {}
+  }
+};
 
 Talk.getAll = function() {
   return new Parse.Query(Talk)
     .include('room')
-    .include('timeSlot')
     .find({
       useMasterKey: true
     })
@@ -26,7 +27,6 @@ Talk.getAll = function() {
 Talk.get = function(id) {
   return new Parse.Query(Talk)
     .include('room')
-    .include('timeSlot')
     .get(id, {
       useMasterKey: true
     })

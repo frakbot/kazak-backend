@@ -17,53 +17,67 @@ var getParseClass = function(className, attributes) {
     });
   });
 
-  ParseClass.prototype.toObject = function() {
+  /**
+   * Convert the DB object into a regular JavaScript object by excluding the
+   * attribute names specified in the `excludeObject`.
+   *
+   * @param {Object=} excludeObject The Object whose attribute names (value can be anything) define
+   *   which attributes in the output object won't be included.
+   * @returns {Object} The converted JavaScript object.
+   */
+  ParseClass.prototype.toObject = function(excludeObject) {
     var self = this;
-    var object = {
-      id: self.id
-    };
+    var object = {};
+    if (!(excludeObject && excludeObject.hasOwnProperty('id'))) {
+      object.id = self.id
+    }
     attributes.forEach(function(attribute) {
-      var value = self.get(attribute);
-      if (value && value.toObject) {
-        value = value.toObject();
+      if (!(excludeObject && excludeObject.hasOwnProperty(attribute))) {
+        var value = self.get(attribute);
+        if (value && value.toObject) {
+          value = value.toObject();
+        }
+        object[attribute] = value;
       }
-      object[attribute] = value;
     });
     return object;
   };
 
-  ParseClass.convertAll = function(elements, extendArray, ElementClass) {
+  ParseClass.convertAll = function(elements, includeObj, excludeObj) {
     var data = [];
     if (elements) {
       elements.forEach(function(elem) {
-        data.push(elem.convert(extendArray));
+        data.push(elem.convert(includeObj, excludeObj));
       });
     }
     return Q.all(data);
   };
 
-  ParseClass.prototype.convert = function(extendArray) {
+  ParseClass.prototype.convert = function(includeObj, excludeObj) {
     var self = this;
     var extendPromises = [];
-    // for each object we need to extend
-    for (var key in extendArray) {
-      var related = extendArray[key];
+    // for each object we need to include
+    for (var name in includeObj) {
+      var childInclude = includeObj[name].include;
+      var childExclude = includeObj[name].exclude;
       // fetch the relation
       var promise = self
-        .relation(related.name).query()
+        .relation(name).query()
         .find()
         .then(function(children) {
-          // convert all the children by specifying the class (can be null)
-          return ParseClass.convertAll(children, related.children);
+          // convert all the children, add the inclusion object and the exclusion array
+          return ParseClass.convertAll(children, childInclude, childExclude);
         });
       extendPromises.push(promise);
     }
     return Q.all(extendPromises)
       .then(function(children) {
-        var converted = self.toObject();
-        for (var key in extendArray) {
-          var value = extendArray[key].name;
-          converted[value] = children[key];
+        // convert the regular object excluding the given attribute names list
+        var converted = self.toObject(excludeObj);
+        var i = 0;
+        for (var name in includeObj) {
+          converted[name] = children[i];
+          i += 1;
         }
         return converted;
       });
