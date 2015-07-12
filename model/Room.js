@@ -7,9 +7,7 @@ var Room = ParseClass('Room', ['name']);
 
 Room.getAll = function() {
   return new Parse.Query(Room)
-    .find({
-      useMasterKey: true
-    })
+    .find()
     .then(function(elems) {
       return Room.convertAll(elems);
     });
@@ -17,9 +15,7 @@ Room.getAll = function() {
 
 Room.get = function(id) {
   return new Parse.Query(Room)
-    .get(id, {
-      useMasterKey: true
-    })
+    .get(id)
     .then(function(elem) {
       return elem.convert();
     });

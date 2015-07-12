@@ -16,9 +16,7 @@ var talkExpansions = {
 Talk.getAll = function() {
   return new Parse.Query(Talk)
     .include('room')
-    .find({
-      useMasterKey: true
-    })
+    .find()
     .then(function(elems) {
       return Talk.convertAll(elems, talkExpansions);
     });
@@ -27,9 +25,7 @@ Talk.getAll = function() {
 Talk.get = function(id) {
   return new Parse.Query(Talk)
     .include('room')
-    .get(id, {
-      useMasterKey: true
-    })
+    .get(id)
     .then(function(elem) {
       return elem.convert(talkExpansions);
     });

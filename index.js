@@ -21,6 +21,7 @@ var presenters = require('./endpoint/presenters');
 var talks = require('./endpoint/talks');
 
 Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
+Parse.Cloud.useMasterKey();
 
 var app = express();
 app.set('port', (process.env.PORT || 5000));

@@ -1,11 +1,11 @@
 'use strict';
 
 var Q = require('q');
-var ParseLib = require('parse');
+var ParseLib = require('parse').Parse;
 
-var config = require('./config');
-var Parse = ParseLib.Parse;
-Parse.initialize(config['appKey'], config['jsKey'], config['master']);
+var config = require('./lib/config');
+Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
+Parse.Cloud.useMasterKey();
 
 var purger = require('./lib/purger');
 var linker = require('./lib/linker');

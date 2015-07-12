@@ -7,9 +7,7 @@ var Presenter = ParseClass('Presenter', ['name', 'bio', 'socialLinks', 'image'])
 
 Presenter.getAll = function() {
   return new Parse.Query(Presenter)
-    .find({
-      useMasterKey: true
-    })
+    .find()
     .then(function(elems) {
       return Presenter.convertAll(elems);
     });
@@ -17,9 +15,7 @@ Presenter.getAll = function() {
 
 Presenter.get = function(id) {
   return new Parse.Query(Presenter)
-    .get(id, {
-      useMasterKey: true
-    })
+    .get(id)
     .then(function(elem) {
       return elem.convert();
     });
