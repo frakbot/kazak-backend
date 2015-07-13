@@ -1,5 +1,6 @@
 {
   "appKey": "the-application-key",
   "jsKey": "the-js-key",
+  "restKey": "the-rest-key",
   "master": "the-master-key"
 }
