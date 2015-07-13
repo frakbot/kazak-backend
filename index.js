@@ -4,7 +4,6 @@ var Parse = require('parse').Parse;
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var appMiddleware = require('./middleware/app');
 var userMiddleware = require('./middleware/user');
 
 var Conference = require('./model/Conference');
@@ -20,6 +19,7 @@ var rooms = require('./endpoint/rooms');
 var timeSlots = require('./endpoint/timeSlots');
 var presenters = require('./endpoint/presenters');
 var talks = require('./endpoint/talks');
+var schedule = require('./endpoint/schedule');
 
 Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
 Parse.Cloud.useMasterKey();
@@ -30,13 +30,14 @@ app.set('port', (process.env.PORT || 5000));
 app.use(require('./lib/hostHandlers'));
 app.use(bodyParser.json());
 
-app.all('/api/*', appMiddleware, userMiddleware);
+app.all('/api/schedule/*', userMiddleware);
 
 users(app);
 rooms(app);
 timeSlots(app);
 presenters(app);
 talks(app);
+schedule(app);
 
 app.use(function(err, req, res, next) {
   if (!err) {
