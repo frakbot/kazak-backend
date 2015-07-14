@@ -9,9 +9,7 @@ var TimeSlot = {};
 TimeSlot.getAll = function() {
   return new Parse.Query(Talk)
     .select(['start', 'end'])
-    .find({
-      useMasterKey: true
-    })
+    .find()
     .then(function(allTimeSlots) {
       return Rx.Observable
         .from(allTimeSlots)

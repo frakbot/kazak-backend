@@ -13,12 +13,15 @@
     "node": "0.12.2"
   },
   "dependencies": {
+    "axios": "^0.5.4",
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
+    "lodash": "^3.10.0",
     "moment": "^2.10.3",
     "object-assign": "^3.0.0",
     "parse": "^1.4.2",
     "q": "^1.4.1",
+    "request-promise": "^0.4.2",
     "rx": "^2.5.3"
   }
 }

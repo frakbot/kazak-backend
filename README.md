@@ -3,6 +3,14 @@ droidcon-backend
 
 Attempts at Parse Land.
 
+## Parse Configuration
+
+1. Create a new Parse application
+2. In Settings/General, disable "Require Revocable Sessions" (don't worry, revocable sessions will 
+still be used)
+3. In Settings/Keys, take note of the application ID, master key, REST key and JavaScript key, as
+all of these will be used in the Web Service.
+
 ## Setup
 
 Create a `config.json` file just as the `config.json.example` and replace the dummy keys with the
