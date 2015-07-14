@@ -40,4 +40,5 @@ In order to make the application run on Heroku, you need to set the following en
 $ heroku config:set PARSE_MASTER_KEY=the-master-key
 $ heroku config:set PARSE_APP_KEY=the-application-key
 $ heroku config:set PARSE_JS_KEY=the-js-key
+$ heroku config:set PARSE_REST_KEY=the-rest-key
 ```
