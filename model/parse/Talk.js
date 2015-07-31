@@ -4,7 +4,7 @@ var ParseClass = require('./ParseClass');
 var Parse = require('parse').Parse;
 
 var Talk = ParseClass('Talk',
-  ['name', 'description', 'subtitle', 'presenters', 'room', 'start', 'end']);
+  ['name', 'description', 'subtitle', 'presenters', 'room', 'startDate', 'endDate']);
 
 var talkExpansions = {
   'presenters': {

@@ -1,6 +1,6 @@
 'use strict';
 
-var Session = require('./../model/Session');
+var Session = require('./../../model/parse/Session');
 
 module.exports = function(req, res, next) {
   var handle401 = function(res) {

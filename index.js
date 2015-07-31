@@ -1,49 +1,48 @@
 'use strict';
 
-var Parse = require('parse').Parse;
+var impl = process.argv[2] || 'firebase';
+
 var express = require('express');
 var bodyParser = require('body-parser');
-
-var userMiddleware = require('./middleware/user');
-
-var Conference = require('./model/Conference');
-var Presenter = require('./model/Presenter');
-var TimeSlot = require('./model/TimeSlot');
-var Talk = require('./model/Talk');
-var Room = require('./model/Room');
-
 var config = require('./lib/config');
 
-var users = require('./endpoint/users');
+if (impl === 'parse') {
+  var Parse = require('parse').Parse;
+  Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
+  Parse.Cloud.useMasterKey();
+}
+
+var initMiddleware = require('./middleware/' + impl + '/init');
+var terminateMiddleware = require('./middleware/' + impl + '/terminate');
+
 var rooms = require('./endpoint/rooms');
 var timeSlots = require('./endpoint/timeSlots');
 var presenters = require('./endpoint/presenters');
 var talks = require('./endpoint/talks');
 var schedule = require('./endpoint/schedule');
-
-Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
-Parse.Cloud.useMasterKey();
+var users = require('./endpoint/users');
 
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
 app.use(require('./lib/hostHandlers'));
 app.use(bodyParser.json());
+app.use(initMiddleware);
 
-app.all('/api/schedule/*', userMiddleware);
+rooms(app, impl);
+talks(app, impl);
+timeSlots(app, impl);
+presenters(app, impl);
+// schedule(app, impl);
+users(app, impl);
 
-users(app);
-rooms(app);
-timeSlots(app);
-presenters(app);
-talks(app);
-schedule(app);
+app.use(terminateMiddleware);
 
 app.use(function(err, req, res, next) {
   if (!err) {
     return next();
   }
-  console.error(err);
+  console.error(err.stack);
   res.status(500);
   res.send(err);
 });

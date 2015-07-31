@@ -1,18 +1,18 @@
 'use strict';
 
 var Q = require('q');
-var ParseLib = require('parse').Parse;
+var Parse = require('parse').Parse;
 
 var config = require('./lib/config');
 Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
 Parse.Cloud.useMasterKey();
 
-var purger = require('./lib/purger');
-var linker = require('./lib/linker');
+var purger = require('./lib/parse/purger');
+var linker = require('./lib/parse/linker');
 
-var Room = require('./model/Room');
-var Talk = require('./model/Talk');
-var Presenter = require('./model/Presenter');
+var Room = require('./model/parse/Room');
+var Talk = require('./model/parse/Talk');
+var Presenter = require('./model/parse/Presenter');
 
 var rooms = require('./lib/bootstrap/rooms');
 var talks = require('./lib/bootstrap/talks');

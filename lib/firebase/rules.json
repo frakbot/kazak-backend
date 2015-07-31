@@ -1,0 +1,14 @@
+{
+  "rules": {
+    ".read": true,
+    "rooms": {
+      ".indexOn": ["name"]
+    },
+    "talks": {
+      ".indexOn": ["name"]
+    },
+    "presenters": {
+      ".indexOn": ["name"]
+    }
+  }
+}

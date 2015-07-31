@@ -4,7 +4,7 @@ var ParseClass = require('./ParseClass');
 var Parse = require('parse').Parse;
 var http = require('axios');
 
-var config = require('./../lib/config');
+var config = require('./../../lib/config');
 var Session = ParseClass('_Session', ['sessionToken', 'user', 'expiresAt']);
 
 Session.getUserWithSessionToken = function(sessionToken) {

@@ -8,14 +8,14 @@ var TimeSlot = {};
 
 TimeSlot.getAll = function() {
   return new Parse.Query(Talk)
-    .select(['start', 'end'])
+    .select(['startDate', 'endDate'])
     .find()
     .then(function(allTimeSlots) {
       return Rx.Observable
         .from(allTimeSlots)
         .distinct(undefined, function(x, y) {
-          return (x.get('start').getTime() === y.get('start').getTime() &&
-                  x.get('end').getTime() === y.get('end').getTime());
+          return (x.get('startDate') === y.get('startDate') &&
+                  x.get('endDate') === y.get('endDate'));
         })
         .toArray()
         .toPromise();

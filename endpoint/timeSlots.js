@@ -1,14 +1,24 @@
 'use strict';
 
-var TimeSlot = require('./../model/TimeSlot');
+var buildTimeSlotEndpoint = function(app, impl) {
+  var TimeSlot = require('./../model/' + impl + '/TimeSlot');
 
-var getAll = function(req, res, next) {
-  TimeSlot.getAll()
-    .then(function(data) {
-      res.send(data);
-    }, next);
-};
+  var get = function(req, res, next) {
+    TimeSlot.get(req.params.timeslot, req.dataLayer)
+      .then(function(data) {
+        res.send(data);
+      }, next);
+  };
 
-module.exports = function(app) {
+  var getAll = function(req, res, next) {
+    TimeSlot.getAll(req.dataLayer)
+      .then(function(data) {
+        res.send(data);
+      }, next);
+  };
+
   app.get('/api/timeslots', getAll);
+  app.get('/api/timeslots/:timeslot', get);
 };
+
+module.exports = buildTimeSlotEndpoint;
