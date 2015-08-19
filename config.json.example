@@ -1,10 +1,6 @@
 {
-  "appKey": "the-application-key",
-  "jsKey": "the-js-key",
-  "restKey": "the-rest-key",
-  "master": "the-master-key",
   "firebase": {
-    "url": "https://the-app-url.firebaseio.com/",
+    "url": "https://your-kazak.firebaseio.com/",
     "secret": "the-firebase-secret"
   }
 }

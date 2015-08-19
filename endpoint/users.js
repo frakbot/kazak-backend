@@ -1,7 +1,7 @@
 'use strict';
 
-var buildUserEndpoint = function(app, impl) {
-  var User = require('./../model/' + impl + '/User');
+var buildUserEndpoint = function(app) {
+  var User = require('./../model/User');
 
   var login = function(req, res) {
     return User.login(req, res);

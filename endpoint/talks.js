@@ -1,7 +1,7 @@
 'use strict';
 
-var buildTalkEndpoint = function(app, impl) {
-  var Talk = require('./../model/' + impl + '/Talk');
+var buildTalkEndpoint = function(app) {
+  var Talk = require('./../model/Talk');
 
   var getAll = function(req, res, next) {
     Talk.getAll(req.dataLayer)

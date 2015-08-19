@@ -1,7 +1,7 @@
 {
-  "name": "droidcon",
-  "version": "1.0.0",
-  "description": "",
+  "name": "kazak-backend",
+  "version": "0.0.1",
+  "description": "Backend for kazak-android",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,7 +10,7 @@
   "author": "Francesco Pontillo <francescopontillo@gmail.com>",
   "license": "Apache-2.0",
   "engines": {
-    "node": "0.12.2"
+    "node": "0.12.5"
   },
   "dependencies": {
     "axios": "^0.5.4",
@@ -20,7 +20,6 @@
     "lodash": "^3.10.0",
     "moment": "^2.10.3",
     "object-assign": "^3.0.0",
-    "parse": "^1.4.2",
     "q": "^1.4.1",
     "request-promise": "^0.4.2",
     "rx": "^2.5.3"

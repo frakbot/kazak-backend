@@ -1,19 +1,11 @@
 'use strict';
 
-var impl = process.argv[2] || 'firebase';
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var config = require('./lib/config');
 
-if (impl === 'parse') {
-  var Parse = require('parse').Parse;
-  Parse.initialize(config.getApplicationKey(), config.getJavascriptKey(), config.getMasterKey());
-  Parse.Cloud.useMasterKey();
-}
-
-var initMiddleware = require('./middleware/' + impl + '/init');
-var terminateMiddleware = require('./middleware/' + impl + '/terminate');
+var initMiddleware = require('./middleware/init');
+var terminateMiddleware = require('./middleware/terminate');
 
 var rooms = require('./endpoint/rooms');
 var timeSlots = require('./endpoint/timeSlots');
@@ -29,12 +21,12 @@ app.use(require('./lib/hostHandlers'));
 app.use(bodyParser.json());
 app.use(initMiddleware);
 
-rooms(app, impl);
-talks(app, impl);
-timeSlots(app, impl);
-presenters(app, impl);
-// schedule(app, impl);
-users(app, impl);
+rooms(app);
+talks(app);
+timeSlots(app);
+presenters(app);
+// schedule(app);
+users(app);
 
 app.use(terminateMiddleware);
 

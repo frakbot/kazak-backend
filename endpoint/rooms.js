@@ -1,7 +1,7 @@
 'use strict';
 
-var buildRoomEndpoint = function(app, impl) {
-  var Room = require('./../model/' + impl + '/Room');
+var buildRoomEndpoint = function(app) {
+  var Room = require('./../model/Room');
 
   var getAll = function(req, res, next) {
     Room.getAll(req.dataLayer)

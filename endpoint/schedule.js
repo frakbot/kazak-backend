@@ -1,8 +1,8 @@
 'use strict';
 
-var buildScheduleEndpoint = function(app, impl) {
-  var Schedule = require('./../model/' + impl + '/Schedule');
-  var userMiddleware = require('./../middleware/' + impl + '/user');
+var buildScheduleEndpoint = function(app) {
+  var Schedule = require('./../model/Schedule');
+  var userMiddleware = require('./../middleware/user');
 
   var get = function(req, res, next) {
     Schedule.get(req.user, req.dataLayer)

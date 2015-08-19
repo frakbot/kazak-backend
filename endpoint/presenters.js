@@ -1,7 +1,7 @@
 'use strict';
 
-var buildPresenterEndpoint = function(app, impl) {
-  var Presenter = require('./../model/' + impl + '/Presenter');
+var buildPresenterEndpoint = function(app) {
+  var Presenter = require('./../model/Presenter');
 
   var getAll = function(req, res, next) {
     Presenter.getAll(req.dataLayer)

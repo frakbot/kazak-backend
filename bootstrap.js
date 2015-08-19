@@ -4,19 +4,19 @@ var Q = require('q');
 var http = require('axios');
 var Firebase = require('firebase');
 
-var purger = require('./lib/firebase/purger');
-var linker = require('./lib/firebase/linker');
+var purger = require('./lib/bootstrap/purger');
+var linker = require('./lib/bootstrap/linker');
 
-var Room = require('./model/firebase/Room');
+var Room = require('./model/Room');
 
 var config = require('./lib/config');
 var firebaseUrl = config.getFirebaseUrl();
 var db = new Firebase(firebaseUrl);
 
-var rooms = require('./lib/bootstrap/rooms');
-var talks = require('./lib/bootstrap/talks');
-var presenters = require('./lib/bootstrap/presenters');
-var timeSlots = require('./lib/bootstrap/timeSlots');
+var rooms = require('./lib/bootstrap/models/rooms');
+var talks = require('./lib/bootstrap/models/talks');
+var presenters = require('./lib/bootstrap/models/presenters');
+var timeSlots = require('./lib/bootstrap/models/timeSlots');
 
 var talkRoom = require('./lib/bootstrap/relations/talk-room');
 var talkPresenters = require('./lib/bootstrap/relations/talk-presenters');
@@ -32,7 +32,7 @@ var init = function() {
 };
 
 var bootstrap = function() {
-  init()
+  return init()
     .then(function() {
       return Q.all([
         purger(db, 'rooms', rooms),
@@ -48,7 +48,7 @@ var bootstrap = function() {
         params: {
           auth: config.getFirebaseSecret()
         },
-        data: require('./lib/firebase/rules.json')
+        data: require('./lib/bootstrap/rules.json')
       });
     })
     .then(function() {
@@ -66,9 +66,9 @@ var bootstrap = function() {
 };
 
 var test = function() {
-  init()
+  return init()
     .then(function() {
-      return Room.get(db, '-JuL1zVQPSkf5nUwC3B9');
+      return Room.get(config.firebase, '-Jx4OMBrgXafcbWwJryS');
     })
     .then(function(room) {
       console.log(room);
@@ -78,4 +78,7 @@ var test = function() {
     });
 };
 
-bootstrap();
+test()
+  .then(function() {
+    process.exit();
+  });

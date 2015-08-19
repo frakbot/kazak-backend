@@ -1,7 +1,7 @@
 'use strict';
 
-var buildTimeSlotEndpoint = function(app, impl) {
-  var TimeSlot = require('./../model/' + impl + '/TimeSlot');
+var buildTimeSlotEndpoint = function(app) {
+  var TimeSlot = require('./../model/TimeSlot');
 
   var get = function(req, res, next) {
     TimeSlot.get(req.params.timeslot, req.dataLayer)
