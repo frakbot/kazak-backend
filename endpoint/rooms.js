@@ -4,14 +4,14 @@ var buildRoomEndpoint = function(app) {
   var Room = require('./../model/Room');
 
   var getAll = function(req, res, next) {
-    Room.getAll(req.dataLayer)
+    Room.getAll(req.context)
       .then(function(data) {
         res.send(data);
       }, next);
   };
 
   var get = function(req, res, next) {
-    return Room.get(req.params.room, req.dataLayer)
+    return Room.get(req.context, req.params.room)
       .then(function(data) {
         res.send(data);
       }, next);

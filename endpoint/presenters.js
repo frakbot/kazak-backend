@@ -4,14 +4,14 @@ var buildPresenterEndpoint = function(app) {
   var Presenter = require('./../model/Presenter');
 
   var getAll = function(req, res, next) {
-    Presenter.getAll(req.dataLayer)
+    Presenter.getAll(req.context)
       .then(function(data) {
         res.send(data);
       }, next);
   };
 
   var get = function(req, res, next) {
-    return Presenter.get(req.params.presenter, req.dataLayer)
+    return Presenter.get(req.context, req.params.presenter)
       .then(function(data) {
         res.send(data);
       }, next);

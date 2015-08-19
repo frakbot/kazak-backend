@@ -5,21 +5,21 @@ var buildScheduleEndpoint = function(app) {
   var userMiddleware = require('./../middleware/user');
 
   var get = function(req, res, next) {
-    Schedule.get(req.user, req.dataLayer)
+    Schedule.get(req.context, req.user)
       .then(function(data) {
         res.send(data);
       }, next);
   };
 
   var addTalk = function(req, res, next) {
-    Schedule.addTalk(req.user, req.params.talk, req.dataLayer)
+    Schedule.addTalk(req.context, req.user, req.params.talk)
       .then(function(data) {
         res.send(data);
       }, next);
   };
 
   var deleteTalk = function(req, res, next) {
-    Schedule.deleteTalk(req.user, req.params.talk, req.dataLayer)
+    Schedule.deleteTalk(req.context, req.user, req.params.talk)
       .then(function(data) {
         res.send(data);
       }, next);

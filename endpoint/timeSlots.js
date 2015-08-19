@@ -3,15 +3,15 @@
 var buildTimeSlotEndpoint = function(app) {
   var TimeSlot = require('./../model/TimeSlot');
 
-  var get = function(req, res, next) {
-    TimeSlot.get(req.params.timeslot, req.dataLayer)
+  var getAll = function(req, res, next) {
+    TimeSlot.getAll(req.context)
       .then(function(data) {
         res.send(data);
       }, next);
   };
 
-  var getAll = function(req, res, next) {
-    TimeSlot.getAll(req.dataLayer)
+  var get = function(req, res, next) {
+    TimeSlot.get(req.context, req.params.timeslot)
       .then(function(data) {
         res.send(data);
       }, next);

@@ -4,14 +4,14 @@ var buildTalkEndpoint = function(app) {
   var Talk = require('./../model/Talk');
 
   var getAll = function(req, res, next) {
-    Talk.getAll(req.dataLayer)
+    Talk.getAll(req.context)
       .then(function(data) {
         res.send(data);
       }, next);
   };
 
   var get = function(req, res, next) {
-    Talk.get(req.params.talk, req.dataLayer)
+    Talk.get(req.context, req.params.talk)
       .then(function(data) {
         res.send(data);
       }, next);
