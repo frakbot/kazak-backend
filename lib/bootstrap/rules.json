@@ -1,14 +1,27 @@
 {
   "rules": {
-    ".read": true,
     "rooms": {
+      ".read": true,
       ".indexOn": ["name"]
     },
     "talks": {
+      ".read": true,
       ".indexOn": ["name"]
     },
     "presenters": {
+      ".read": true,
       ".indexOn": ["name"]
+    },
+    "schedules": {
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid",
+        "talks": {
+          "$talk_id": {
+            ".validate": "root.child('talks').child($talk_id).exists()"
+          }
+        }
+      }
     }
   }
 }
