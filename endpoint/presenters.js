@@ -2,34 +2,37 @@
 
 var buildPresenterEndpoint = function(app) {
   var Presenter = require('./../model/Presenter');
+  var ErrorHandler = require('./../lib/firebaseErrorHandler');
 
-  var getAll = function(req, res, next) {
+  var getAll = function(req, res) {
     Presenter.getAll(req.context)
       .then(function(data) {
         res.send(data);
-      }, next);
+      })
+      .catch(ErrorHandler(res));
   };
 
-  var get = function(req, res, next) {
+  var get = function(req, res) {
     return Presenter.get(req.context, req.params.presenter)
       .then(function(data) {
         res.send(data);
-      }, next);
+      })
+      .catch(ErrorHandler(res));
   };
 
-  var post = function(req, res, next) {
+  var post = function(req, res) {
     // TODO
   };
 
-  var put = function(req, res, next) {
+  var put = function(req, res) {
     // TODO
   };
 
-  var patch = function(req, res, next) {
+  var patch = function(req, res) {
     // TODO
   };
 
-  var del = function(req, res, next) {
+  var del = function(req, res) {
     // TODO
   };
 

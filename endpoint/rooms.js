@@ -2,19 +2,22 @@
 
 var buildRoomEndpoint = function(app) {
   var Room = require('./../model/Room');
+  var ErrorHandler = require('./../lib/firebaseErrorHandler');
 
-  var getAll = function(req, res, next) {
+  var getAll = function(req, res) {
     Room.getAll(req.context)
       .then(function(data) {
         res.send(data);
-      }, next);
+      })
+      .catch(ErrorHandler(res));
   };
 
-  var get = function(req, res, next) {
-    return Room.get(req.context, req.params.room)
+  var get = function(req, res) {
+    Room.get(req.context, req.params.room)
       .then(function(data) {
         res.send(data);
-      }, next);
+      })
+      .catch(ErrorHandler(res));
   };
 
   var post = function(req, res, next) {

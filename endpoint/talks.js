@@ -2,19 +2,22 @@
 
 var buildTalkEndpoint = function(app) {
   var Talk = require('./../model/Talk');
+  var ErrorHandler = require('./../lib/firebaseErrorHandler');
 
-  var getAll = function(req, res, next) {
+  var getAll = function(req, res) {
     Talk.getAll(req.context)
       .then(function(data) {
         res.send(data);
-      }, next);
+      })
+      .catch(ErrorHandler(res));
   };
 
-  var get = function(req, res, next) {
+  var get = function(req, res) {
     Talk.get(req.context, req.params.talk)
       .then(function(data) {
         res.send(data);
-      }, next);
+      })
+      .catch(ErrorHandler(res));
   };
 
   var post = function(req, res, next) {
