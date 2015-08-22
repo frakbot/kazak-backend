@@ -4,6 +4,7 @@ var Q = require('q');
 var http = require('axios');
 var Firebase = require('firebase');
 
+var Helper = require('./lib/bootstrap/helper');
 var purger = require('./lib/bootstrap/purger');
 var linker = require('./lib/bootstrap/linker');
 
@@ -22,7 +23,7 @@ var talkRoom = require('./lib/bootstrap/relations/talk-room');
 var talkPresenters = require('./lib/bootstrap/relations/talk-presenters');
 
 var init = function() {
-  return Q.ninvoke(db, 'authWithCustomToken', config.getFirebaseSecret())
+  return Helper.authWithCustomToken(db, config.getFirebaseSecret())
     .then(function(authData) {
       console.log('Authenticated successfully with provider', authData.provider);
     })
