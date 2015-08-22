@@ -12,7 +12,6 @@ var timeSlots = require('./endpoint/timeSlots');
 var presenters = require('./endpoint/presenters');
 var talks = require('./endpoint/talks');
 var schedule = require('./endpoint/schedule');
-var users = require('./endpoint/users');
 
 var app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -26,7 +25,6 @@ talks(app);
 timeSlots(app);
 presenters(app);
 // schedule(app);
-users(app);
 
 app.use(terminateMiddleware);
 
