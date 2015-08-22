@@ -28,6 +28,22 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
   };
 
   /**
+   * Get the default expand object, if the input one is falsy.
+   *
+   * @param {*} expand - The input expand object.
+   * @returns {Object} - The same input object, if truthy, or the default one for the class.
+   */
+  var defaultExpand = function(expand) {
+    if (!expand) {
+      expand = {};
+      Object.keys(expandables || {}).forEach(function(attr) {
+        expand[attr] = true;
+      });
+    }
+    return expand;
+  };
+
+  /**
    * Get all elements from the collection, eventually expanding the provided connections.
    *
    * @param {Object} config - The configuration object for your Firebase instance.
@@ -61,12 +77,7 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
     return http('GET', config, collectionName, id)
       .then(function(result) {
         // if expand is falsy, set the default
-        if (!expand) {
-          expand = {};
-          Object.keys(expandables || {}).forEach(function(attr) {
-            expand[attr] = true;
-          });
-        }
+        expand = defaultExpand(expand);
         return FirebaseClass.expand(config, result, expand, id);
       });
   };
