@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function(req, res, next) {
-  req.app = 'droidcon-android';
+  // TODO: get the real app from the request API key
+  req.app = 'kazak-android';
   next();
 };
