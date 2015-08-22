@@ -83,6 +83,20 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
   };
 
   /**
+   * Error handler for handling expansion errors: during expansion it may happen that a reference
+   * doesn't exist on Firebase. Instead of erroring, print a warning for debugging purposes and
+   * discard the expanded element.
+   * @param {string} className - The class name of the object expansion was attempted for.
+   * @param {string} key - The key of the object expansion was attempted for.
+   * @returns {Function} - A custom error handler that prints out the warning.
+   */
+  var expansionErrorHandler = function(className, key) {
+    return function(err) {
+      console.warn('Object', key, 'of class', className,
+        'generated a warning during expansion:\n', err.stack);
+    };
+  };
+
    * Expand an element of this class by retrieving all of its connections to other classes
    * (collections) on Firebase.
    *
@@ -146,7 +160,8 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
           var p = fClass.get(config, attribute, expandChildren)
             .then(function(o) {
               element[key] = o;
-            });
+            })
+            .catch(expansionErrorHandler(expandables[key], key));
           expansionPromises.push(p);
         } else {
           // reset the Object to an Array
@@ -158,7 +173,8 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
               .then(function(o) {
                 element[key].push(o);
                 return o;
-              });
+              })
+              .catch(expansionErrorHandler(expandables[key], key));
             expansionPromises.push(cp);
           });
         }
