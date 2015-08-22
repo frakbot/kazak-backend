@@ -66,6 +66,8 @@ var bootstrap = function() {
     });
 };
 
+// playground
+
 var test = function() {
   return init()
     .then(function() {
@@ -79,7 +81,35 @@ var test = function() {
     });
 };
 
-test()
+var TEST_ACCOUNT = {
+  email: 'ahahah@gmail.com',
+  password: 'lol'
+};
+
+var makeDummyAccount = function() {
+  return init()
+    .then(function() {
+      return Helper.createUser(db, TEST_ACCOUNT);
+    })
+    .then(function(userData) {
+      console.log('Successfully created user account with uid:', userData.uid);
+    })
+    .catch(function(error) {
+      console.log('Error creating user:', error);
+    });
+};
+
+var makeDummyLogin = function() {
+  return Helper.authWithPassword(db, TEST_ACCOUNT)
+    .then(function(authData) {
+      console.log(authData);
+    })
+};
+
+makeDummyLogin()
   .then(function() {
     process.exit();
+  })
+  .catch(function(err) {
+    console.error(err.stack);
   });
