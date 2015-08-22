@@ -115,8 +115,14 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
   FirebaseClass.expand = function(config, element, expand, id) {
     var expansionPromises = [];
 
+    if (!element) {
+      return Q.fcall(function() {
+        return element;
+      });
+    }
+
     // add the id, if any
-    if (id) {
+    if (id && _.isObject(element)) {
       element.id = id;
     }
 
