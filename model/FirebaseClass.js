@@ -202,7 +202,8 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
             })
             .catch(expansionErrorHandler(expandables[key], key));
           expansionPromises.push(p);
-        } else {
+        } else if (typeof(attribute) === 'object') {
+          // if the object is multiple (a map, i.e. a javascript object)
           // reset the Object to an Array
           element[key] = [];
           // if there is more than one object of the same class, for each of them
