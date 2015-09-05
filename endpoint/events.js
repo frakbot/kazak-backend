@@ -1,5 +1,7 @@
 'use strict';
 
+var cacheMiddleware = require('./../middleware/cache');
+
 var buildEventEndpoint = function(app) {
   var Event = require('./../model/Event');
   var ErrorHandler = require('./../lib/firebaseErrorHandler');
@@ -15,6 +17,7 @@ var buildEventEndpoint = function(app) {
     });
     Event.getAll(req.context, expand)
       .then(function(data) {
+        cacheMiddleware.save(req, data);
         res.send(data);
       })
       .catch(ErrorHandler(res));
@@ -44,7 +47,7 @@ var buildEventEndpoint = function(app) {
     // TODO
   };
 
-  app.get('/api/events', getAll);
+  app.get('/api/events', cacheMiddleware.find, getAll);
   app.get('/api/events/:event', get);
   app.post('/api/events/:event', post);
   app.put('/api/events/:event', put);
