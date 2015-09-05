@@ -6,6 +6,9 @@ var buildEventEndpoint = function(app) {
 
   var getAll = function(req, res) {
     var expansions = req.query.expand;
+    if (typeof(expansions) === 'string') {
+      expansions = [expansions];
+    }
     var expand = {};
     (expansions || []).forEach(function(val) {
       expand[val] = true;
