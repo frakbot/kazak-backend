@@ -15,12 +15,12 @@ var firebaseUrl = config.getFirebaseUrl();
 var db = new Firebase(firebaseUrl);
 
 var rooms = require('./lib/bootstrap/models/rooms');
-var talks = require('./lib/bootstrap/models/talks');
+var events = require('./lib/bootstrap/models/events');
 var presenters = require('./lib/bootstrap/models/presenters');
 var timeSlots = require('./lib/bootstrap/models/timeSlots');
 
-var talkRoom = require('./lib/bootstrap/relations/talk-room');
-var talkPresenters = require('./lib/bootstrap/relations/talk-presenters');
+var eventRoom = require('./lib/bootstrap/relations/event-room');
+var eventPresenters = require('./lib/bootstrap/relations/event-presenters');
 
 var init = function() {
   return Helper.authWithCustomToken(db, config.getFirebaseSecret())
@@ -37,7 +37,7 @@ var bootstrap = function() {
     .then(function() {
       return Q.all([
         purger(db, 'rooms', rooms),
-        purger(db, 'talks', talks),
+        purger(db, 'events', events),
         purger(db, 'presenters', presenters),
         purger(db, 'timeSlots', timeSlots)
       ]);
@@ -54,8 +54,8 @@ var bootstrap = function() {
     })
     .then(function() {
       return Q.all([
-        linker(db, 'talks', 'rooms', 'room', 'talks', talkRoom),
-        linker(db, 'talks', 'presenters', 'presenters', 'talks', talkPresenters)
+        linker(db, 'events', 'rooms', 'room', 'events', eventRoom),
+        linker(db, 'events', 'presenters', 'presenters', 'events', eventPresenters)
       ]);
     })
     .then(function() {
@@ -106,7 +106,7 @@ var makeDummyLogin = function() {
     })
 };
 
-makeDummyLogin()
+bootstrap()
   .then(function() {
     process.exit();
   })
