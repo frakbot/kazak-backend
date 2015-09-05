@@ -19,7 +19,7 @@ var events = require('./lib/bootstrap/models/events');
 var presenters = require('./lib/bootstrap/models/presenters');
 var timeSlots = require('./lib/bootstrap/models/timeSlots');
 
-var eventRoom = require('./lib/bootstrap/relations/event-room');
+var eventRoom = require('./lib/bootstrap/relations/event-rooms');
 var eventPresenters = require('./lib/bootstrap/relations/event-presenters');
 
 var init = function() {
@@ -54,7 +54,7 @@ var bootstrap = function() {
     })
     .then(function() {
       return Q.all([
-        linker(db, 'events', 'rooms', 'room', 'events', eventRoom),
+        linker(db, 'events', 'rooms', 'rooms', 'events', eventRoom),
         linker(db, 'events', 'presenters', 'presenters', 'events', eventPresenters)
       ]);
     })

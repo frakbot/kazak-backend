@@ -5,7 +5,7 @@ var Event = FirebaseClass(
   'events',
   ['name', 'description', 'type'],
   {
-    'room': 'Room',
+    'rooms': 'Room',
     'presenters': 'Presenter'
   });
 
