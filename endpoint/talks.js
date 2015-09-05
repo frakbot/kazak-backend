@@ -5,7 +5,12 @@ var buildTalkEndpoint = function(app) {
   var ErrorHandler = require('./../lib/firebaseErrorHandler');
 
   var getAll = function(req, res) {
-    Talk.getAll(req.context)
+    var expansions = req.query.expand;
+    var expand = {};
+    (expansions || []).forEach(function(val) {
+      expand[val] = true;
+    });
+    Talk.getAll(req.context, expand)
       .then(function(data) {
         res.send(data);
       })
