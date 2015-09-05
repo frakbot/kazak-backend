@@ -4,7 +4,7 @@
       ".read": true,
       ".indexOn": ["name"]
     },
-    "talks": {
+    "events": {
       ".read": true,
       ".indexOn": ["name"]
     },
@@ -16,9 +16,9 @@
       "$user_id": {
         ".read": "$user_id === auth.uid",
         ".write": "$user_id === auth.uid",
-        "talks": {
-          "$talk_id": {
-            ".validate": "root.child('talks').child($talk_id).exists()"
+        "events": {
+          "$event_id": {
+            ".validate": "root.child('events').child($event_id).exists()"
           }
         }
       }

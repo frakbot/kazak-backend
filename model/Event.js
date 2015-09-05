@@ -1,12 +1,12 @@
 'use strict';
 
 var FirebaseClass = require('./FirebaseClass');
-var Talk = FirebaseClass(
-  'talks',
-  ['name', 'description'],
+var Event = FirebaseClass(
+  'events',
+  ['name', 'description', 'type'],
   {
     'room': 'Room',
     'presenters': 'Presenter'
   });
 
-module.exports = Talk;
+module.exports = Event;

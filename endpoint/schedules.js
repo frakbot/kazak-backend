@@ -14,7 +14,7 @@ var buildScheduleEndpoint = function(app) {
    */
   var getScheduleClass = function(user) {
     return FirebaseClass(
-      'schedules/' + user + '/talks',
+      'schedules/' + user + '/events',
       []
     );
   };
@@ -27,18 +27,18 @@ var buildScheduleEndpoint = function(app) {
       .catch(ErrorHandler(res));
   };
 
-  var addTalk = function(req, res) {
+  var addEvent = function(req, res) {
     var UserSchedule = getScheduleClass(req.params.user);
-    UserSchedule.put(req.context, req.params.talk, true)
+    UserSchedule.put(req.context, req.params.event, true)
       .then(function(data) {
         res.send(data);
       })
       .catch(ErrorHandler(res));
   };
 
-  var deleteTalk = function(req, res) {
+  var deleteEvent = function(req, res) {
     var UserSchedule = getScheduleClass(req.params.user);
-    UserSchedule.delete(req.context, req.params.talk)
+    UserSchedule.delete(req.context, req.params.event)
       .then(function(data) {
         res.send(data);
       })
@@ -46,8 +46,8 @@ var buildScheduleEndpoint = function(app) {
   };
 
   app.get('/api/schedules/:user', userMiddleware, get);
-  app.post('/api/schedules/:user/:talk', userMiddleware, addTalk);
-  app.delete('/api/schedules/:user/:talk', userMiddleware, deleteTalk);
+  app.post('/api/schedules/:user/:event', userMiddleware, addEvent);
+  app.delete('/api/schedules/:user/:event', userMiddleware, deleteEvent);
 
 };
 

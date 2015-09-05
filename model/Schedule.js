@@ -4,7 +4,7 @@ var FirebaseClass = require('./FirebaseClass');
 var Schedule = FirebaseClass(
   'schedules',
   [],
-  {'talks': 'Talk'}
+  {'events': 'Event'}
 );
 
 module.exports = Schedule;

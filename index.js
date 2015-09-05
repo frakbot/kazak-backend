@@ -10,7 +10,7 @@ var terminateMiddleware = require('./middleware/terminate');
 var rooms = require('./endpoint/rooms');
 var timeSlots = require('./endpoint/timeSlots');
 var presenters = require('./endpoint/presenters');
-var talks = require('./endpoint/talks');
+var events = require('./endpoint/events');
 var schedules = require('./endpoint/schedules');
 
 var app = express();
@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(initMiddleware);
 
 rooms(app);
-talks(app);
+events(app);
 timeSlots(app);
 presenters(app);
 schedules(app);

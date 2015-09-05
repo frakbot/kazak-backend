@@ -1,7 +1,7 @@
 'use strict';
 
-var buildTalkEndpoint = function(app) {
-  var Talk = require('./../model/Talk');
+var buildEventEndpoint = function(app) {
+  var Event = require('./../model/Event');
   var ErrorHandler = require('./../lib/firebaseErrorHandler');
 
   var getAll = function(req, res) {
@@ -10,7 +10,7 @@ var buildTalkEndpoint = function(app) {
     (expansions || []).forEach(function(val) {
       expand[val] = true;
     });
-    Talk.getAll(req.context, expand)
+    Event.getAll(req.context, expand)
       .then(function(data) {
         res.send(data);
       })
@@ -18,7 +18,7 @@ var buildTalkEndpoint = function(app) {
   };
 
   var get = function(req, res) {
-    Talk.get(req.context, req.params.talk)
+    Event.get(req.context, req.params.event)
       .then(function(data) {
         res.send(data);
       })
@@ -41,12 +41,12 @@ var buildTalkEndpoint = function(app) {
     // TODO
   };
 
-  app.get('/api/talks', getAll);
-  app.get('/api/talks/:talk', get);
-  app.post('/api/talks/:talk', post);
-  app.put('/api/talks/:talk', put);
-  app.patch('/api/talks/:talk', patch);
-  app.delete('/api/talks/:talk', del);
+  app.get('/api/events', getAll);
+  app.get('/api/events/:event', get);
+  app.post('/api/events/:event', post);
+  app.put('/api/events/:event', put);
+  app.patch('/api/events/:event', patch);
+  app.delete('/api/events/:event', del);
 };
 
-module.exports = buildTalkEndpoint;
+module.exports = buildEventEndpoint;
