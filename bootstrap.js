@@ -18,9 +18,11 @@ var rooms = require('./lib/bootstrap/models/rooms');
 var events = require('./lib/bootstrap/models/events');
 var presenters = require('./lib/bootstrap/models/presenters');
 var timeSlots = require('./lib/bootstrap/models/timeSlots');
+var tracks = require('./lib/bootstrap/models/tracks');
 
-var eventRoom = require('./lib/bootstrap/relations/event-rooms');
+var eventRooms = require('./lib/bootstrap/relations/event-rooms');
 var eventPresenters = require('./lib/bootstrap/relations/event-presenters');
+var eventTrack = require('./lib/bootstrap/relations/event-track');
 
 var init = function() {
   return Helper.authWithCustomToken(db, config.getFirebaseSecret())
@@ -39,7 +41,8 @@ var bootstrap = function() {
         purger(db, 'rooms', rooms),
         purger(db, 'events', events),
         purger(db, 'presenters', presenters),
-        purger(db, 'timeSlots', timeSlots)
+        purger(db, 'timeSlots', timeSlots),
+        purger(db, 'tracks', tracks)
       ]);
     })
     .then(function() {
@@ -54,15 +57,16 @@ var bootstrap = function() {
     })
     .then(function() {
       return Q.all([
-        linker(db, 'events', 'rooms', 'rooms', 'events', eventRoom),
-        linker(db, 'events', 'presenters', 'presenters', 'events', eventPresenters)
+        linker(db, 'events', 'rooms', 'rooms', 'events', eventRooms),
+        linker(db, 'events', 'presenters', 'presenters', 'events', eventPresenters),
+        linker(db, 'events', 'tracks', 'track', 'events', eventTrack)
       ]);
     })
     .then(function() {
       console.log('Completed.');
     })
     .catch(function(err) {
-      console.error(err);
+      console.error(err.stack);
     });
 };
 

@@ -6,7 +6,8 @@ var Event = FirebaseClass(
   ['name', 'description', 'type'],
   {
     'rooms': 'Room',
-    'presenters': 'Presenter'
+    'presenters': 'Presenter',
+    'track': 'Track'
   });
 
 module.exports = Event;
