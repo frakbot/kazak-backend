@@ -12,6 +12,10 @@
       ".read": true,
       ".indexOn": ["name"]
     },
+    "tracks": {
+      ".read": true,
+      ".indexOn": ["name"]
+    },
     "schedules": {
       "$user_id": {
         ".read": "$user_id === auth.uid",
