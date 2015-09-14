@@ -4,7 +4,10 @@ var FirebaseClass = require('./FirebaseClass');
 var Room = new FirebaseClass(
   'rooms',
   ['name'],
-  {'events': 'Event'}
+  {
+    'events': 'Event',
+    'secondaryEvents': 'Event'
+  }
 );
 
 module.exports = Room;
