@@ -29,12 +29,21 @@ $ cd kazak-backend
 $ npm install
 ```
 
+## Data entry
+
+There is a set of hardcoded data in bootstrap folder.
+To import them run 
+```
+node bootstrap.js
+```
+Thereafter, you can add/edit data via the firebase console.
+
 ## Run
 
 To run, simply execute:
 
 ```shell
-$ node index.js
+$ gulp
 ```
 
 ## Deploy
