@@ -34,7 +34,7 @@ $ npm install
 To run, simply execute:
 
 ```shell
-$ node index.js
+$ gulp
 ```
 
 ## Deploy
