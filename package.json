@@ -9,6 +9,10 @@
   },
   "author": "Francesco Pontillo <francescopontillo@gmail.com>",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/novoda/kazak-backend.git"
+  },
   "engines": {
     "node": "0.12.5"
   },
@@ -20,9 +24,15 @@
     "lodash": "^3.10.0",
     "memory-cache": "^0.1.4",
     "moment": "^2.10.3",
+    "morgan": "^1.6.1",
     "object-assign": "^3.0.0",
     "q": "^1.4.1",
     "request-promise": "^0.4.2",
     "rx": "^2.5.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-livereload": "^3.8.0",
+    "gulp-nodemon": "^2.0.4"
   }
 }

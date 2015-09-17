@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+var app = require('../app');
+
+app.set('port', process.env.PORT || 5000);
+
+var server = app.listen(app.get('port'), function() {
+  console.log('Kazak backend listening at %s:%s...', server.address().address,
+    server.address().port);
+  console.log('Press CTRL+C to quit.');
+});

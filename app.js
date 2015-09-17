@@ -2,7 +2,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var config = require('./lib/config');
+var logger = require('morgan');
 
 var initMiddleware = require('./middleware/init');
 var terminateMiddleware = require('./middleware/terminate');
@@ -15,8 +15,12 @@ var schedules = require('./endpoint/schedules');
 var tracks = require('./endpoint/tracks');
 
 var app = express();
-app.set('port', (process.env.PORT || 5000));
 
+var env = process.env.NODE_ENV || 'development';
+app.locals.ENV = env;
+app.locals.ENV_DEVELOPMENT = (env === 'development');
+
+app.use(logger('dev'));
 app.use(require('./lib/hostHandlers'));
 app.use(bodyParser.json());
 app.use(initMiddleware);
@@ -39,7 +43,4 @@ app.use(function(err, req, res, next) {
   res.send(err);
 });
 
-var server = app.listen(app.get('port'), '0.0.0.0', function() {
-  console.log('App listening at %s:%s...', server.address().address, server.address().port);
-  console.log('Press CTRL+C to quit.');
-});
+module.exports = app;
