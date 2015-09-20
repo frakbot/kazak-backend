@@ -26,6 +26,16 @@
           }
         }
       }
+    },
+    "stars": {
+      "$uid": {
+        ".write": true,
+        "events": {
+          "$event_id": {
+            ".validate": "root.child('events').child($event_id).exists()"
+          }
+        }
+      }
     }
   }
 }

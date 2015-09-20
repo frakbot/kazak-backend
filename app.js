@@ -13,6 +13,7 @@ var presenters = require('./endpoint/presenters');
 var events = require('./endpoint/events');
 var schedules = require('./endpoint/schedules');
 var tracks = require('./endpoint/tracks');
+var stars = require('./endpoint/stars');
 
 var app = express();
 
@@ -31,6 +32,7 @@ timeSlots(app);
 presenters(app);
 schedules(app);
 tracks(app);
+stars(app);
 
 app.use(terminateMiddleware);
 
