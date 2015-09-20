@@ -87,9 +87,6 @@ Kazak is licenced under the MIT licence, unless explicitly stated.
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 
-Contributions from Facebook employees are licenced under the terms specified in the
-[`FB-LICENSE`](FB-LICENSE) file.
-
 ## Thanks to
 
 This app couldn't exist without the awesome work of its core team of contributors and everybody that has helped the project.
