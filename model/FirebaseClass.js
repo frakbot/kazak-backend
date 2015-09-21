@@ -48,7 +48,7 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
    *
    * @param {Object} config - The configuration object for your Firebase instance.
    * @param {string} config.url - The base URL of your Firebase instance.
-   * @param {string} config.url - The secret to use for accessing your Firebase instance.
+   * @param {string} config.secret - The secret to use for accessing your Firebase instance.
    * @param {Object} expand - Dictionary containing attribute names of connections that have to be
    *   expanded. Attribute values must be {Object}s with the same specs as expand, as they will be
    *   used for recursive expansion.
@@ -66,7 +66,7 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
    *
    * @param {Object} config - The configuration object for your Firebase instance.
    * @param {string} config.url - The base URL of your Firebase instance.
-   * @param {string} config.url - The secret to use for accessing your Firebase instance.
+   * @param {string} config.secret - The secret to use for accessing your Firebase instance.
    * @param {string} id - The ID of the object to retrieve.
    * @param {Object} expand - Dictionary containing attribute names of connections that have to be
    *   expanded. Attribute values must be Objects with the same specs as expand, as they will be
@@ -102,7 +102,7 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
    *
    * @param {Object} config - The configuration object for your Firebase instance.
    * @param {string} config.url - The base URL of your Firebase instance.
-   * @param {string} config.url - The secret to use for accessing your Firebase instance.
+   * @param {string} config.secret - The secret to use for accessing your Firebase instance.
    * @param {string} id - The ID of the object to put.
    * @param {*} object - The object to store on Firebase.
    * @param {Object=} expand - Dictionary containing attribute names of connections that have to be
@@ -124,7 +124,7 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
    *
    * @param {Object} config - The configuration object for your Firebase instance.
    * @param {string} config.url - The base URL of your Firebase instance.
-   * @param {string} config.url - The secret to use for accessing your Firebase instance.
+   * @param {string} config.secret - The secret to use for accessing your Firebase instance.
    * @param {string} id - The ID of the object to patch.
    * @param {*} object - The object part to update on Firebase.
    * @param {Object=} expand - Dictionary containing attribute names of connections that have to be
@@ -146,7 +146,7 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
    *
    * @param {Object} config - The configuration object for your Firebase instance.
    * @param {string} config.url - The base URL of your Firebase instance.
-   * @param {string} config.url - The secret to use for accessing your Firebase instance.
+   * @param {string} config.secret - The secret to use for accessing your Firebase instance.
    * @param {string} id - The ID of the object to put.
    * @returns {Promise} - A Promise that will be resolved when the object is deleted.
    */
@@ -163,7 +163,7 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
    *
    * @param {Object} config - The configuration object for your Firebase instance.
    * @param {string} config.url - The base URL of your Firebase instance.
-   * @param {string} config.url - The secret to use for accessing your Firebase instance.
+   * @param {string} config.secret - The secret to use for accessing your Firebase instance.
    * @param {Object} element - The element to expand using its connections.
    * @param {Object} expand - Dictionary containing attribute names of connections that have to be
    *   expanded. Attribute values must be {Object}s with the same specs as expand, as they will be
@@ -255,7 +255,7 @@ var buildFirebaseClass = function(collectionName, attributes, expandables) {
    *
    * @param {Object} config - The configuration object for your Firebase instance.
    * @param {string} config.url - The base URL of your Firebase instance.
-   * @param {string} config.url - The secret to use for accessing your Firebase instance.
+   * @param {string} config.secret - The secret to use for accessing your Firebase instance.
    * @param {Object|Object[]} elements - Dictionary of elements or array of elements to expand.
    * @param {Object} expand - Dictionary containing attribute names of connections that have to be
    *   expanded. Attribute values must be {Object}s with the same specs as expand, as they will be
