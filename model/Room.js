@@ -1,12 +1,12 @@
 'use strict';
 
-var FirebaseClass = require('./FirebaseClass');
+var FirebaseClass = require('./../lib/FirebaseClass');
 var Room = new FirebaseClass(
   'rooms',
   ['name'],
   {
-    'events': 'Event',
-    'secondaryEvents': 'Event'
+    'events': __dirname + '/Event',
+    'secondaryEvents': __dirname + '/Event'
   }
 );
 

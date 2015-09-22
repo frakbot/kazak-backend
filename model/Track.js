@@ -1,10 +1,10 @@
 'use strict';
 
-var FirebaseClass = require('./FirebaseClass');
+var FirebaseClass = require('./../lib/FirebaseClass');
 var Track = new FirebaseClass(
   'tracks',
   ['name', 'color'],
-  {'events': 'Event'}
+  {'events': __dirname + '/Event'}
 );
 
 module.exports = Track;

@@ -3,7 +3,7 @@
 var buildScheduleEndpoint = function(app) {
   var Schedule = require('./../model/Schedule');
   var userMiddleware = require('./../middleware/user');
-  var FirebaseClass = require('./../model/FirebaseClass');
+  var FirebaseClass = require('./../lib/FirebaseClass');
   var ErrorHandler = require('./../lib/firebaseErrorHandler');
 
   /**
