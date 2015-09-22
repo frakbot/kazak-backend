@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp coverage"
   },
   "author": "Francesco Pontillo <francescopontillo@gmail.com>",
   "license": "Apache-2.0",
@@ -31,7 +31,14 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-batch": "^1.0.5",
+    "gulp-istanbul": "^0.10.0",
+    "gulp-jasmine": "^2.1.0",
     "gulp-livereload": "^3.8.0",
-    "gulp-nodemon": "^2.0.4"
+    "gulp-nodemon": "^2.0.4",
+    "gulp-watch": "^4.3.5",
+    "jasmine-spec-reporter": "^2.4.0",
+    "nock": "^2.12.0",
+    "wrench": "^1.5.8"
   }
 }
