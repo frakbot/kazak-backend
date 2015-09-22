@@ -3,7 +3,7 @@
 var FirebaseClass = require('./FirebaseClass');
 var Event = FirebaseClass(
   'events',
-  ['name', 'description', 'type'],
+  ['name', 'description', 'type', 'stars'],
   {
     'rooms': 'Room',
     'secondaryRooms': 'Room',

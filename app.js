@@ -13,12 +13,16 @@ var presenters = require('./endpoint/presenters');
 var events = require('./endpoint/events');
 var schedules = require('./endpoint/schedules');
 var tracks = require('./endpoint/tracks');
+var stars = require('./endpoint/stars');
+
+var config = require('./lib/config');
 
 var app = express();
 
 var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = (env === 'development');
+app.locals.SUPER_SECRET = config.getFirebaseSecret();
 
 app.use(logger('dev'));
 app.use(require('./lib/hostHandlers'));
@@ -31,6 +35,7 @@ timeSlots(app);
 presenters(app);
 schedules(app);
 tracks(app);
+stars(app);
 
 app.use(terminateMiddleware);
 
