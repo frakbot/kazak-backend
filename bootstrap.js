@@ -1,7 +1,7 @@
 'use strict';
 
 var Q = require('q');
-var http = require('axios');
+var http = require('request-promise');
 var Firebase = require('firebase');
 
 var Helper = require('./lib/bootstrap/helper');
@@ -48,12 +48,12 @@ var bootstrap = function() {
     })
     .then(function() {
       return http({
-        url: firebaseUrl + '.settings/rules.json',
+        uri: firebaseUrl + '.settings/rules.json',
         method: 'PUT',
-        params: {
+        qs: {
           auth: config.getFirebaseSecret()
         },
-        data: require('./lib/bootstrap/rules.json')
+        body: require('./lib/bootstrap/rules.json')
       });
     })
     .then(function() {
