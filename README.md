@@ -1,5 +1,5 @@
-Kazak-backend
-=============
+# kazak-backend
+[![](https://ci.novoda.com/buildStatus/icon?job=kazak-backend)](https://ci.novoda.com/job/kazak-backend/lastBuild/console)
 
 Backend for [Kazak-Android](https://github.com/novoda/kazak-android) *(or is Kazak-Android the frontend for Kazak-backend?)*
 
@@ -56,9 +56,9 @@ You can run tests in multiple modes:
 You can also run a code coverage task via `gulp coverage`, that will output under `coverage/`:
 
 - `cobertura/coverage.xml`, XML output for the Jenkins Cobertura plugin
-- `html/`, website with a nice view of covered LOCs
+- `html/**/*.*`, website with a nice view of covered LOCs
 - `json/coverage.json`, line-by-line coverage details
-- `lcov`, coverage output in the LCOV format
+- `lcov/coverage.lcov`, coverage output in the LCOV format
 - `text/coverage.txt` and `text/coverage-summary.txt`, textual summaries
 
 ## Deploy
