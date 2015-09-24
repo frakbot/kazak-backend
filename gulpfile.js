@@ -1,23 +1,10 @@
-var gulp = require('gulp'),
-  nodemon = require('gulp-nodemon'),
-  livereload = require('gulp-livereload');
+var gulp = require('gulp');
+var wrench = require('wrench');
 
-
-gulp.task('develop', function () {
-  livereload.listen();
-  nodemon({
-    script: 'bin/www',
-    ext: 'js json',
-    stdout: false
-  }).on('readable', function () {
-    this.stdout.on('data', function (chunk) {
-      if(/^Kazak backend listening at/.test(chunk)){
-        livereload.changed(__dirname);
-      }
-    });
-    this.stdout.pipe(process.stdout);
-    this.stderr.pipe(process.stderr);
-  });
+wrench.readdirSyncRecursive('./gulp').filter(function(file) {
+  return /\.js$/i.test(file);
+}).map(function(file) {
+  require('./gulp/' + file);
 });
 
 gulp.task('default', [

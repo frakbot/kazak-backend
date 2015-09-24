@@ -1,10 +1,10 @@
 'use strict';
 
-var FirebaseClass = require('./FirebaseClass');
+var FirebaseClass = require('./../lib/FirebaseClass');
 var Stars = FirebaseClass(
   'stars',
   [],
-  {'events': 'Event'}
+  {'events': __dirname + '/Event'}
 );
 
 module.exports = Stars;

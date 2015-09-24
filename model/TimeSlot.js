@@ -1,6 +1,6 @@
 'use strict';
 
-var FirebaseClass = require('./FirebaseClass');
+var FirebaseClass = require('./../lib/FirebaseClass');
 var TimeSlot = new FirebaseClass(
   'timeSlots',
   ['start', 'end']

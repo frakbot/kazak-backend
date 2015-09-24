@@ -1,10 +1,10 @@
 'use strict';
 
-var FirebaseClass = require('./FirebaseClass');
+var FirebaseClass = require('./../lib/FirebaseClass');
 var Schedule = FirebaseClass(
   'schedules',
   [],
-  {'events': 'Event'}
+  {'events': __dirname + '/Event'}
 );
 
 module.exports = Schedule;
